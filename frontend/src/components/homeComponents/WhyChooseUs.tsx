@@ -1,4 +1,3 @@
-import React, { useMemo } from "react";
 import { SectionHeader } from "../common";
 
 const WhyChooseUs = () => {
@@ -42,18 +41,16 @@ const WhyChooseUs = () => {
     },
   ];
 
-  const renderReasons = useMemo(() => {
-    return reasons.map((reason) => (
-      <div
-        key={reason.id}
-        className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:bg-indigo-100 dark:hover:bg-indigo-900"
-      >
-        <div className="text-4xl mb-4">{reason.icon}</div>
-        <h3 className="text-xl font-bold mb-2">{reason.title}</h3>
-        <p className="text-gray-600 dark:text-gray-300">{reason.description}</p>
-      </div>
-    ));
-  }, [reasons]);
+  const renderReasons = reasons.map((reason) => (
+    <div
+      key={reason.id}
+      className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:bg-indigo-100 dark:hover:bg-indigo-900"
+    >
+      <div className="text-4xl mb-4">{reason.icon}</div>
+      <h3 className="text-xl font-bold mb-2">{reason.title}</h3>
+      <p className="text-gray-600 dark:text-gray-300">{reason.description}</p>
+    </div>
+  ));
 
   return (
     <div className="py-16 ">

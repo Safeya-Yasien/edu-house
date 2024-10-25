@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import { ButtonLink, SectionHeader } from "../common";
 import { FreeMode, Pagination } from "swiper/modules";
@@ -87,7 +87,10 @@ const BestInstructors = () => {
                       alt={instructor.name}
                       className="w-24 h-24 rounded-full mx-auto mb-4"
                     />
-                    <Link href='#' className="text-xl font-semibold mb-2 hover:text-customPurple dark:hover:text-purple-300">
+                    <Link
+                      href="#"
+                      className="text-xl font-semibold mb-2 hover:text-customPurple dark:hover:text-purple-300"
+                    >
                       {instructor.name}
                     </Link>
                     <p className="text-gray-600 dark:text-gray-300 mb-2">
