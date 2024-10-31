@@ -12,7 +12,7 @@ import {
   AiOutlineMessage,
   AiOutlineSetting,
   AiOutlineLogout,
-} from "react-icons/ai"; // Importing react-icons
+} from "react-icons/ai";
 import { FaUsers } from "react-icons/fa6";
 import { FaChalkboardTeacher } from "react-icons/fa";
 
@@ -20,7 +20,7 @@ const iconStyles = "h-4 w-5";
 
 const menuItems = [
   {
-    title: "Menu",
+    title: "Main Menu",
     items: [
       {
         icon: <AiOutlineHome className={iconStyles} />,
@@ -45,6 +45,35 @@ const menuItems = [
         label: "Subjects",
         href: "/list/subjects",
         visible: ["admin"],
+      },
+    ],
+  },
+  {
+    title: "Academics",
+    items: [
+      {
+        icon: <AiOutlineBook className={iconStyles} />,
+        label: "Add Course",
+        href: "/add/course",
+        visible: ["admin", "teacher"],
+      },
+      {
+        icon: <AiOutlineCheckSquare className={iconStyles} />,
+        label: "Add Exam",
+        href: "/add/exam",
+        visible: ["admin", "teacher"],
+      },
+      {
+        icon: <AiOutlineFileText className={iconStyles} />,
+        label: "Add Lesson",
+        href: "/add/lesson",
+        visible: ["admin", "teacher"],
+      },
+      {
+        icon: <AiOutlineCalendar className={iconStyles} />,
+        label: "Payment",
+        href: "/payment",
+        visible: ["admin", "teacher", "student", "parent"],
       },
       {
         icon: <MdClass className={iconStyles} />,
@@ -82,6 +111,11 @@ const menuItems = [
         href: "/list/attendance",
         visible: ["admin", "teacher", "student", "parent"],
       },
+    ],
+  },
+  {
+    title: "Resources",
+    items: [
       {
         icon: <AiOutlineCalendar className={iconStyles} />,
         label: "Events",
@@ -137,7 +171,7 @@ const menuItems = [
       },
       {
         icon: <AiOutlineSetting className={iconStyles} />,
-        label: "Settings ",
+        label: "Settings",
         href: "/settings",
         visible: ["admin", "teacher", "student", "parent"],
       },
@@ -156,14 +190,14 @@ const Menu = () => {
     <div className="mt-4 text-sm">
       {menuItems.map((i) => (
         <div key={i.title} className="flex flex-col gap-2">
-          <span className="hidden lg:block text-gray-600 font-semibold text-md my-4">
+          <span className="hidden lg:block text-gray-600 dark:text-slate-300 font-semibold text-md my-4">
             {i.title}
           </span>
           {i.items.map((item) => (
             <Link
               href={item.href}
               key={item.label}
-              className="flex items-center gap-2 justify-center lg:justify-start text-gray-600 md:px-2 py-2 rounded-md hover:bg-lamaSkyLight"
+              className="flex items-center gap-2 justify-center lg:justify-start text-gray-600 dark:text-slate-300  md:px-2 py-2 rounded-md hover:bg-lamaSkyLight"
             >
               {item.icon}
               <span className="hidden lg:block">{item.label}</span>
