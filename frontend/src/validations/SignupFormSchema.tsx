@@ -8,10 +8,10 @@ export const SignupFormSchema = z
       .string()
       .min(1, { message: "Email is required " })
       .email({ message: "Not a valid email" }),
+    // remember to add password pattern
     password: z
       .string()
-      .min(8, { message: "Password must be at least 8 characters" })
-     ,
+      .min(8, { message: "Password must be at least 8 characters" }),
     confirm_password: z.string(),
   })
   .refine((data) => data.password === data.confirm_password, {
