@@ -44,11 +44,11 @@ const Login = () => {
         Cookies.set("token", token, {
           path: "/",
         });
+
         setIsUserLoggedIn(true);
 
         setTimeout(() => {
           router.push("/");
-          router.refresh();
         }, 1000);
       }
     } catch (error) {
