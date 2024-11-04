@@ -32,7 +32,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const token = Cookies.get("token");
-
     setIsUserLoggedIn(!!token);
   }, []);
 
