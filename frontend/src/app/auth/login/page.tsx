@@ -3,19 +3,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import axios from "axios";
 import cn from "@/lib/utlis";
 import Cookies from "js-cookie";
-import { useUserContext } from "@/context/UserContext";
 import { LoginFormSchema, TLoginForm } from "@/validations/LoginFormSchema";
 import { AuthInputField } from "@/components/auth";
+import { useAuthContext } from "@/context/AuthContext";
+import { axiosInstance } from "@/services/axiosConfig";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const { setIsUserLoggedIn } = useUserContext();
+  const { setAuth } = useAuthContext();
 
   const {
     register,
@@ -29,14 +29,16 @@ const Login = () => {
   const onSubmit: SubmitHandler<TLoginForm> = async ({ email, password }) => {
     try {
       setLoading(true);
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`,
-        {
+      const response = await axiosInstance({
+        method: "POST",
+        url: "/auth/login",
+        data: {
           redirect: false,
           email,
           password,
-        }
-      );
+        },
+      });
+
       console.log("login response", response);
 
       if (response.status === 200) {
@@ -44,12 +46,8 @@ const Login = () => {
         Cookies.set("token", token, {
           path: "/",
         });
-
-        setIsUserLoggedIn(true);
-
-        setTimeout(() => {
-          router.push("/");
-        }, 1000);
+        setAuth(true);
+        router.push("/");
       }
     } catch (error) {
       console.error("Login failed", error);

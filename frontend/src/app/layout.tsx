@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Footer, Navbar } from "@/components/common";
 
 import "./globals.css";
-import { UserProvider } from "@/context/UserContext";
 import Providers from "./Providers";
+import { AuthContextProvider } from "@/context/AuthContext";
 
 export const metadata: Metadata = {
   title: "Edu House",
@@ -19,11 +19,11 @@ export default function MainLayout({
     <html lang="en">
       <body className="overflow-x-hidden h-screen flex flex-col">
         <Providers attribute="class" defaultTheme="system">
-          <UserProvider>
+          <AuthContextProvider>
             <Navbar />
             <div className="pt-16 flex-grow">{children}</div>
             <Footer />
-          </UserProvider>
+          </AuthContextProvider>
         </Providers>
       </body>
     </html>

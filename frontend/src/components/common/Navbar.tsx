@@ -9,12 +9,12 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { FaUser } from "react-icons/fa6";
-import { useUserContext } from "@/context/UserContext";
+import { useAuthContext } from "@/context/AuthContext";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-  const { isUserLoggedIn, setIsUserLoggedIn } = useUserContext();
+  const { isAuth, setAuth } = useAuthContext();
   const [clientSide, setClientSide] = useState(false);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     Cookies.remove("token");
-    setIsUserLoggedIn(false);
+    setAuth(false);
     router.replace("/auth/login");
   };
 
@@ -58,7 +58,7 @@ const Navbar = () => {
           {/* Login / Logout Button */}
           {clientSide && (
             <div className="flex items-center gap-4">
-              {!isUserLoggedIn ? (
+              {!isAuth ? (
                 <Link
                   href="/auth/login"
                   className="bg-customPurple dark:bg-purple-800 text-white rounded-lg px-4 py-2 text-sm"
