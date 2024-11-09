@@ -6,81 +6,26 @@ import {
   LevelFilter,
   RatingFilter,
 } from "@/components/coursesComponents";
+import { actGetCourses } from "@/redux/courses/actGetCourses";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { IoIosArrowDown } from "react-icons/io";
 import { RiBarChartHorizontalLine } from "react-icons/ri";
 
-const courses = [
-  {
-    id: "1",
-    title: "Learn React from Scratch",
-    imageUrl: "/images/courses_images/course_1.webp",
-    hours: "30 hours",
-    lessons: 25,
-    price: "$49.99",
-    instructor: {
-      name: "John Doe",
-      imageUrl: "/images/instructors_images/instructor_2.jpg",
-    },
-    rating: 4.5,
-    level: "Intermediate",
-  },
-  {
-    id: "2",
-    title: "Learn React from Scratch",
-    imageUrl: "/images/courses_images/course_1.webp",
-    hours: "30 hours",
-    lessons: 25,
-    price: "$49.99",
-    instructor: {
-      name: "John Doe",
-      imageUrl: "/images/instructors_images/instructor_2.jpg",
-    },
-    rating: 4.5,
-    level: "Intermediate",
-  },
-  {
-    id: "3",
-    title: "Learn React from Scratch",
-    imageUrl: "/images/courses_images/course_1.webp",
-    hours: "30 hours",
-    lessons: 25,
-    price: "$49.99",
-    instructor: {
-      name: "John Doe",
-      imageUrl: "/images/instructors_images/instructor_2.jpg",
-    },
-    rating: 4.5,
-    level: "Intermediate",
-  },
-  {
-    id: "4",
-    title: "Learn React from Scratch",
-    imageUrl: "/images/courses_images/course_1.webp",
-    hours: "30 hours",
-    lessons: 25,
-    price: "$49.99",
-    instructor: {
-      name: "John Doe",
-      imageUrl: "/images/instructors_images/instructor_2.jpg",
-    },
-    rating: 4.5,
-    level: "Intermediate",
-  },
-];
-
 const Courses = () => {
-  const renderCourses = courses.map((course) => (
-    <CourseCard key={course.id} course={course} />
-  ));
-
   const [open, setOpen] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const { courses, loading } = useAppSelector((state) => state.courses);
+
+  useEffect(() => {
+    dispatch(actGetCourses());
+  }, [dispatch, courses]);
 
   return (
     <div className="py-16">
@@ -175,7 +120,13 @@ const Courses = () => {
               </div>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-              {renderCourses}
+              {loading ? (
+                <div>Loading courses...</div>
+              ) : (
+                courses.map((course) => (
+                  <CourseCard key={course._id} course={course} />
+                ))
+              )}
             </div>
           </div>
         </div>

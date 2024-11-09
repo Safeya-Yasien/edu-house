@@ -1,11 +1,12 @@
 type TInstructor = {
   name: string;
-  imageUrl: string;
+  image_url: string;
 };
 
 export type TCourse = {
+  _id: string;
   title: string;
-  imageUrl: string;
+  image_url: string;
   hours: string;
   lessons: number;
   price: string;

@@ -4,6 +4,7 @@ import { Footer, Navbar } from "@/components/common";
 import "./globals.css";
 import Providers from "./Providers";
 import { AuthContextProvider } from "@/context/AuthContext";
+import StoreProvider from "./StoreProvider";
 
 export const metadata: Metadata = {
   title: "Edu House",
@@ -20,9 +21,11 @@ export default function MainLayout({
       <body className="overflow-x-hidden h-screen flex flex-col">
         <Providers attribute="class" defaultTheme="system">
           <AuthContextProvider>
-            <Navbar />
-            <div className="pt-16 flex-grow">{children}</div>
-            <Footer />
+            <StoreProvider>
+              <Navbar />
+              <div className="pt-16 flex-grow">{children}</div>
+              <Footer />
+            </StoreProvider>
           </AuthContextProvider>
         </Providers>
       </body>
