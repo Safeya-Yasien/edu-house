@@ -7,7 +7,7 @@ import Cookies from "js-cookie";
 type TResponse = TCourse[];
 
 export const actGetCourses = createAsyncThunk(
-  "users/fetchByIdStatus",
+  "courses/getCourses",
   async (_, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {

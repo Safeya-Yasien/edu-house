@@ -7,13 +7,23 @@ const CourseCard = ({ course }: { course: TCourse }) => {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow flex flex-col ">
       <div className="relative h-64 w-full bg-slate-100">
-        <Image
-          src={course.image_url}
-          alt={course.title}
-          fill
-          sizes="25vw"
-          className="object-cover"
-        />
+        {course.image_url ? (
+          <Image
+            src={course.image_url}
+            alt={course.title}
+            fill
+            sizes="25vw"
+            className="object-cover"
+          />
+        ) : (
+          <Image
+            src="/images/courses_images/course_1.webp"
+            alt={course.title}
+            fill
+            sizes="25vw"
+            className="object-cover"
+          />
+        )}
       </div>
       <div className="p-4 flex flex-col gap-4">
         <h3 className="text-lg font-semibold">{course.title}</h3>

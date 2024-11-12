@@ -21,12 +21,14 @@ import { RiBarChartHorizontalLine } from "react-icons/ri";
 const Courses = () => {
   const [open, setOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  // const { courses, loading } = useAppSelector((state) => state.courses);
-  const courses = useAppSelector((state) => state.courses.courses);
+  const { courses, loading, error } = useAppSelector((state) => state.courses);
+  // const courses = useAppSelector((state) => state.courses.courses);
 
   useEffect(() => {
+    console.log("Dispatching actGetCourses action...");
+
     dispatch(actGetCourses());
-  }, [dispatch, courses]);
+  }, [dispatch]);
 
   return (
     <div className="py-16">
@@ -120,20 +122,22 @@ const Courses = () => {
                 </button>
               </div>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-              {courses.map((course) => (
-                <CourseCard key={course._id} course={course} />
-              ))}
-            </div>
-            {/* <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-              {loading ? (
-                <div>Loading courses...</div>
-              ) : (
-                courses.map((course) => (
+
+            {loading === "pending" && (
+              <div className="text-center text-xl">Loading courses...</div>
+            )}
+
+            {loading === "failed" && (
+              <div className="text-red-500 text-center">Error: {error}</div>
+            )}
+
+            {loading === "succeeded" && (
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                {courses.map((course) => (
                   <CourseCard key={course._id} course={course} />
-                ))
-              )}
-            </div> */}
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
