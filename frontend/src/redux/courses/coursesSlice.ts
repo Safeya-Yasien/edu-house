@@ -28,7 +28,7 @@ const coursesSlice = createSlice({
         state.error = null;
       })
       .addCase(actGetCourses.fulfilled, (state, action) => {
-        state.loading = "succeeded";a
+        state.loading = "succeeded";
         state.courses = action.payload;
       })
       .addCase(actGetCourses.rejected, (state, action) => {

@@ -21,7 +21,8 @@ import { RiBarChartHorizontalLine } from "react-icons/ri";
 const Courses = () => {
   const [open, setOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  const { courses, loading } = useAppSelector((state) => state.courses);
+  // const { courses, loading } = useAppSelector((state) => state.courses);
+  const courses = useAppSelector((state) => state.courses.courses);
 
   useEffect(() => {
     dispatch(actGetCourses());
@@ -120,6 +121,11 @@ const Courses = () => {
               </div>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+              {courses.map((course) => (
+                <CourseCard key={course._id} course={course} />
+              ))}
+            </div>
+            {/* <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
               {loading ? (
                 <div>Loading courses...</div>
               ) : (
@@ -127,7 +133,7 @@ const Courses = () => {
                   <CourseCard key={course._id} course={course} />
                 ))
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
